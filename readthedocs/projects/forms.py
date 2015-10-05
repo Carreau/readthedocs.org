@@ -1,7 +1,6 @@
 """Project forms"""
 
 from random import choice
-from urlparse import urlparse
 
 from django import forms
 from django.conf import settings
@@ -20,6 +19,7 @@ from readthedocs.projects import constants
 from readthedocs.projects.models import Project, EmailHook, WebHook, Domain
 from readthedocs.privacy.loader import AdminPermission
 
+import six.moves.urllib as urlparse
 
 class ProjectForm(forms.ModelForm):
 

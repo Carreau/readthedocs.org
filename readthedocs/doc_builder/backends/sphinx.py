@@ -19,6 +19,7 @@ from ..base import BaseBuilder, restoring_chdir
 from ..exceptions import BuildEnvironmentError
 from ..environments import BuildCommand
 from ..constants import SPHINX_TEMPLATE_DIR, SPHINX_STATIC_DIR, PDF_RE
+import six
 
 log = logging.getLogger(__name__)
 
@@ -71,7 +72,7 @@ class BaseSphinx(BaseBuilder):
             outfile = codecs.open(outfile_path, encoding='utf-8', mode='a')
         except IOError:
             trace = sys.exc_info()[2]
-            raise ProjectImportError('Conf file not found'), None, trace
+            six.reraise(ProjectImportError('Conf file not found'), None, trace)
         try:
             outfile.write("\n")
             # TODO this should be handled better in the theme

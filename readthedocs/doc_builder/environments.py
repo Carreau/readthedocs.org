@@ -31,6 +31,7 @@ from .constants import (DOCKER_SOCKET, DOCKER_VERSION, DOCKER_IMAGE,
                         DOCKER_LIMITS, DOCKER_TIMEOUT_EXIT_CODE,
                         DOCKER_OOM_EXIT_CODE, SPHINX_TEMPLATE_DIR,
                         MKDOCS_TEMPLATE_DIR)
+import six
 
 log = logging.getLogger(__name__)
 
@@ -393,7 +394,7 @@ class BuildEnvironment(object):
 
         # Attempt to stop unicode errors on build reporting
         for key, val in self.build.items():
-            if isinstance(val, basestring):
+            if isinstance(val, six.string_types):
                 self.build[key] = val.decode('utf-8', 'ignore')
 
         try:
@@ -433,7 +434,7 @@ class DockerEnvironment(BuildEnvironment):
         self.container = None
         self.container_name = None
         if self.version:
-            self.container_name = slugify(unicode(self.version))
+            self.container_name = slugify(six.text_type(self.version))
 
     def __enter__(self):
         '''Start of environment context'''

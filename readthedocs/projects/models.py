@@ -3,7 +3,6 @@
 import fnmatch
 import logging
 import os
-from urlparse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -34,6 +33,7 @@ from readthedocs.vcs_support.base import VCSProject
 from readthedocs.vcs_support.backends import backend_cls
 from readthedocs.vcs_support.utils import Lock, NonBlockingLock
 
+import six.moves.urllib as urlparse
 
 log = logging.getLogger(__name__)
 
@@ -262,6 +262,9 @@ class Project(models.Model):
         )
 
     def __unicode__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
     @property

@@ -6,6 +6,7 @@ from collections import OrderedDict
 from mock import patch
 from django.conf import settings
 from django.test import TestCase
+import six
 
 log = logging.getLogger(__name__)
 
@@ -108,4 +109,4 @@ class WizardTestCase(TestCase):
         self.assertIn(field, response.context['wizard']['form'].errors)
         if match is not None:
             error = response.context['wizard']['form'].errors[field]
-            self.assertRegexpMatches(unicode(error), match)
+            self.assertRegexpMatches(six.text_type(error), match)

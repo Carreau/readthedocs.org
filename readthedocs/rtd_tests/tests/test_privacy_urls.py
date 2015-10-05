@@ -1,3 +1,4 @@
+from __future__ import print_function
 import re
 
 from django.contrib.admindocs.views import extract_views_from_urlpatterns
@@ -77,10 +78,10 @@ class URLAccessMixin(object):
             for not_obj in self.context_data:
                 if isinstance(obj, list) or isinstance(obj, set) or isinstance(obj, tuple):
                     self.assertNotIn(not_obj, obj)
-                    print "%s not in %s" % (not_obj, obj)
+                    print("%s not in %s" % (not_obj, obj))
                 else:
                     self.assertNotEqual(not_obj, obj)
-                    print "%s is not %s" % (not_obj, obj)
+                    print("%s is not %s" % (not_obj, obj))
 
     def _test_url(self, urlpatterns):
         deconstructed_urls = extract_views_from_urlpatterns(urlpatterns)
@@ -95,9 +96,9 @@ class URLAccessMixin(object):
                     raise Exception('URL argument not in test kwargs. Please add `%s`' % key)
                 added_kwargs[key] = self.default_kwargs[key]
             path = reverse(name, kwargs=added_kwargs)
-            print "Tested %s (%s)" % (name, path)
+            print("Tested %s (%s)" % (name, path))
             self.assertResponse(path=path, name=name)
-            print "Passed %s (%s)" % (name, path)
+            print("Passed %s (%s)" % (name, path))
             added_kwargs = {}
 
     def setUp(self):

@@ -13,14 +13,15 @@ from readthedocs.donate.models import SupporterPromo
 from readthedocs.projects.models import Project
 from readthedocs.projects.version_handling import highest_version
 from readthedocs.projects.version_handling import parse_version_failsafe
+import six
 
 
 def get_version_compare_data(project, base_version=None):
     highest_version_obj, highest_version_comparable = highest_version(
         project.versions.filter(active=True))
     ret_val = {
-        'project': unicode(highest_version_obj),
-        'version': unicode(highest_version_comparable),
+        'project': six.text_type(highest_version_obj),
+        'version': six.text_type(highest_version_comparable),
         'is_highest': True,
     }
     if highest_version_obj:

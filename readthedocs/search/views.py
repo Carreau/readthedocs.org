@@ -1,10 +1,10 @@
+from __future__ import print_function
 from pprint import pprint
 import collections
 import os
 import json
 import logging
 import mimetypes
-import md5
 
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -70,8 +70,8 @@ def elastic_search(request):
                         facets[facet_type][term['term']] = term['count']
 
     if settings.DEBUG:
-        print pprint(results)
-        print pprint(facets)
+        print(pprint(results))
+        print(pprint(facets))
 
     if query:
         user = ''

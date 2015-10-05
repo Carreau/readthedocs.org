@@ -5,7 +5,7 @@ import os
 import json
 import logging
 import mimetypes
-import md5
+import sys
 
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
@@ -30,6 +30,12 @@ from readthedocs.builds.models import Version
 from readthedocs.projects.models import Project, ImportedFile
 from readthedocs.search.indexes import PageIndex
 from readthedocs.search.views import LOG_TEMPLATE
+
+if sys.version_info < (3,):
+    import md5 as _md5
+    md5 = _md5.new
+else:
+    from hashlib import md5
 
 log = logging.getLogger(__name__)
 search_log = logging.getLogger(__name__ + '.search')
@@ -114,7 +120,7 @@ def _badge_return(redirect, url):
         http_response = HttpResponse(response.content,
                                      content_type="image/svg+xml")
         http_response['Cache-Control'] = 'no-cache'
-        http_response['Etag'] = md5.new(url)
+        http_response['Etag'] = md5(url)
         return http_response
 
 

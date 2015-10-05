@@ -68,7 +68,7 @@ class SupporterForm(forms.ModelForm):
                 description='Read the Docs Sustained Engineering',
                 receipt_email=self.cleaned_data['email']
             )
-        except stripe.error.CardError, e:
+        except stripe.error.CardError as e:
             stripe_error = e.json_body['error']
             log.error('Credit card error: %s', stripe_error['message'])
             raise forms.ValidationError(

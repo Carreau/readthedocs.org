@@ -1,5 +1,6 @@
 """OAuth utility functions"""
 
+from __future__ import print_function
 import logging
 import json
 
@@ -180,8 +181,8 @@ def process_bitbucket_json(user, json):
             for repo in page['values']:
                 RemoteRepository.objects.create_from_bitbucket_api(repo,
                                                                    user=user)
-    except TypeError, e:
-        print e
+    except TypeError as e:
+        print(e)
 
 
 def import_bitbucket(user, sync):

@@ -13,6 +13,7 @@ import stripe
 from .forms import CardForm, GoldProjectForm
 from .models import GoldUser
 from readthedocs.projects.models import Project
+from six.moves import range
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -123,8 +124,8 @@ def cancel(request):
         {
             'publishable': settings.STRIPE_PUBLISHABLE,
             'soon': soon(),
-            'months': range(1, 13),
-            'years': range(2011, 2036)
+            'months': list(range(1, 13)),
+            'years': list(range(2011, 2036))
         },
         context_instance=RequestContext(request)
     )
@@ -136,8 +137,8 @@ def thanks(request):
         {
             'publishable': settings.STRIPE_PUBLISHABLE,
             'soon': soon(),
-            'months': range(1, 13),
-            'years': range(2011, 2036)
+            'months': list(range(1, 13)),
+            'years': list(range(2011, 2036))
         },
         context_instance=RequestContext(request)
     )

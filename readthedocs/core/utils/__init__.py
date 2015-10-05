@@ -2,7 +2,7 @@ import getpass
 import logging
 import os
 
-from urlparse import urlparse
+import six.moves.urllib as urlparse
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
