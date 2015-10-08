@@ -28,6 +28,7 @@ celery==3.1.18
 django-celery==3.1.16
 django-allauth==0.21.0
 dnspython==1.11.0
+six
 
 # VCS
 mercurial==2.6.3
